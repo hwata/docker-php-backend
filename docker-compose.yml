@@ -2,6 +2,9 @@ version: '3.3'
 
 volumes:
   mysql-volume:
+    driver: local
+  web-volume:
+    driver: local
 
 services:
   app:
@@ -9,7 +12,8 @@ services:
       context: .
       dockerfile: ./docker/php/Dockerfile
     volumes:
-      - ./src/:/var/www/html
+      #- ./src:/var/www/html
+      - web-volume:/var/www/html
     environment:
       - DB_CONNECTION=mysql
       - DB_HOST=db
@@ -27,7 +31,8 @@ services:
     depends_on:
       - app
     volumes:
-      - ./src/:/var/www/html
+      #- ./src:/var/www/html
+      - web-volume:/var/www/html
 
   db:
     build:
