@@ -20,3 +20,6 @@ RUN apt-get update && \
     && docker-php-ext-install pdo_mysql bcmath intl
 
 WORKDIR /var/www/html
+
+# xdebug 
+RUN pecl install xdebug && docker-php-ext-enable xdebug
